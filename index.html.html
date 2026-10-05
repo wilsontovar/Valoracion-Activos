@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia y Evolución Teórica de la Valoración de Activos</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- KaTeX for crisp mathematical formulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        era1: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                            bg: '#f8fafc'
+                        },
+                        era2: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        },
+                        era3: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1e293b;
+            border-radius: 9999px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 9999px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+        
+        .theorist-card {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .theorist-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .glow-era1 { box-shadow: 0 0 25px -5px rgba(2, 132, 199, 0.3); }
+        .glow-era2 { box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.3); }
+        .glow-era3 { box-shadow: 0 0 25px -5px rgba(139, 92, 246, 0.3); }
+
+        .katex-display {
+            margin: 0.5em 0 !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 antialiased selection:bg-indigo-500 selection:text-white pb-12">
+
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                
+                <div>
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="bg-indigo-500/10 text-indigo-400 text-xs font-semibold px-3 py-1 rounded-full border border-indigo-500/20">
+                            Especialización en Finanzas
+                        </span>
+                        <span class="text-slate-400 text-xs flex items-center gap-1">
+                            <i class="fa-solid fa-graduation-cap"></i> Material Guía de Clase
+                        </span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                        Historia y Evolución Teórica de la Valoración de Activos
+                    </h1>
+                    <p class="text-slate-400 text-sm mt-1 max-w-2xl">
+                        De la preferencia temporal al CAPM: el desarrollo intelectual detrás del cálculo del Valor Presente.
+                    </p>
+                </div>
+
+                <!-- Formula Card Display -->
+                <div class="bg-slate-800/90 border border-slate-700/80 rounded-2xl p-4 sm:px-6 flex items-center justify-between gap-6 shadow-xl shrink-0">
+                    <div>
+                        <div class="text-xs uppercase tracking-wider text-indigo-400 font-bold mb-1">Ecuación Fundamental</div>
+                        <div id="header-formula" class="text-xl sm:text-2xl font-mono font-bold text-white">
+                            $$VP = \frac{VF}{(1+i)^n}$$
+                        </div>
+                    </div>
+                    <div class="border-l border-slate-700 pl-4 text-xs text-slate-400 space-y-1">
+                        <div><strong class="text-slate-200">VP:</strong> Valor Presente</div>
+                        <div><strong class="text-slate-200">VF:</strong> Flujo Futuro</div>
+                        <div><strong class="text-slate-200">i:</strong> Tasa Descuento</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
+
+        <!-- Controls & Filter Toolbar -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900/60 p-3 rounded-2xl border border-slate-800">
+            <div class="flex flex-wrap items-center gap-2" id="filter-buttons">
+                <button data-era="all" class="filter-btn active bg-indigo-600 text-white text-xs font-semibold px-4 py-2 rounded-xl transition hover:bg-indigo-500 flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group"></i> Todos (7 Teóricos)
+                </button>
+                <button data-era="1" class="filter-btn bg-slate-800 text-slate-300 hover:text-white text-xs font-semibold px-4 py-2 rounded-xl transition hover:bg-slate-700 flex items-center gap-2 border border-slate-700/50">
+                    <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span> Era 1: Origen del Valor
+                </button>
+                <button data-era="2" class="filter-btn bg-slate-800 text-slate-300 hover:text-white text-xs font-semibold px-4 py-2 rounded-xl transition hover:bg-slate-700 flex items-center gap-2 border border-slate-700/50">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> Era 2: Flujos Descontados
+                </button>
+                <button data-era="3" class="filter-btn bg-slate-800 text-slate-300 hover:text-white text-xs font-semibold px-4 py-2 rounded-xl transition hover:bg-slate-700 flex items-center gap-2 border border-slate-700/50">
+                    <span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span> Era 3: Tasa de Riesgo (i)
+                </button>
+            </div>
+
+            <!-- Navigation Helper Buttons -->
+            <div class="flex items-center gap-2 self-end sm:self-auto">
+                <span class="text-xs text-slate-400 hidden md:inline">Navega con flechas <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-[10px] text-slate-300">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-[10px] text-slate-300">→</kbd></span>
+                <button id="btn-prev" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium px-3 py-2 rounded-xl border border-slate-700 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-left"></i> Anterior
+                </button>
+                <button id="btn-next" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium px-3 py-2 rounded-xl border border-slate-700 transition flex items-center gap-1.5">
+                    Siguiente <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Interactive Eras & Timeline Cards Area -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- ERA 1 BLOCK -->
+            <div class="era-container bg-slate-900/40 border border-sky-500/20 rounded-2xl p-5 space-y-4 relative overflow-hidden" data-era-container="1">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-sky-500/5 rounded-full blur-2xl pointer-events-none"></div>
+                
+                <div class="flex items-center justify-between border-b border-sky-500/20 pb-3">
+                    <div>
+                        <span class="text-[10px] font-bold tracking-widest text-sky-400 uppercase">Era 1 (1556 - 1930)</span>
+                        <h2 class="text-base font-bold text-white">Origen del Valor del Dinero</h2>
+                    </div>
+                    <span class="w-8 h-8 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20 flex items-center justify-center text-xs font-bold">01</span>
+                </div>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Nacimiento de la teoría de preferencia temporal y matematización básica del dinero en el tiempo.
+                </p>
+
+                <div class="space-y-3 pt-1" id="cards-era-1">
+                    <!-- Cards populated via JS -->
+                </div>
+            </div>
+
+            <!-- ERA 2 BLOCK -->
+            <div class="era-container bg-slate-900/40 border border-emerald-500/20 rounded-2xl p-5 space-y-4 relative overflow-hidden" data-era-container="2">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none"></div>
+                
+                <div class="flex items-center justify-between border-b border-emerald-500/20 pb-3">
+                    <div>
+                        <span class="text-[10px] font-bold tracking-widest text-emerald-400 uppercase">Era 2 (1938 - 1956)</span>
+                        <h2 class="text-base font-bold text-white">Flujos Descontados & Valoración</h2>
+                    </div>
+                    <span class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center text-xs font-bold">02</span>
+                </div>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Aplicación de las ecuaciones a activos financieros, acciones corporativas y dividendos.
+                </p>
+
+                <div class="space-y-3 pt-1" id="cards-era-2">
+                    <!-- Cards populated via JS -->
+                </div>
+            </div>
+
+            <!-- ERA 3 BLOCK -->
+            <div class="era-container bg-slate-900/40 border border-purple-500/20 rounded-2xl p-5 space-y-4 relative overflow-hidden" data-era-container="3">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-2xl pointer-events-none"></div>
+                
+                <div class="flex items-center justify-between border-b border-purple-500/20 pb-3">
+                    <div>
+                        <span class="text-[10px] font-bold tracking-widest text-purple-400 uppercase">Era 3 (1952 - 1964)</span>
+                        <h2 class="text-base font-bold text-white">Estimación del Riesgo & Tasa 'i'</h2>
+                    </div>
+                    <span class="w-8 h-8 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center text-xs font-bold">03</span>
+                </div>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Formalización del riesgo, diversificación de portafolios y costo de capital para definir la tasa 'i'.
+                </p>
+
+                <div class="space-y-3 pt-1" id="cards-era-3">
+                    <!-- Cards populated via JS -->
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Detailed View Panel for Selected Theorist -->
+        <section id="detail-panel" class="bg-slate-900 border-2 border-indigo-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden transition-all duration-300">
+            <div class="absolute -right-12 -bottom-12 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div id="detail-content" class="space-y-6 relative z-10">
+                <!-- Injected via JavaScript -->
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Data model containing all historical theorists and details
+        const theoristsData = [
+            {
+                id: 'azpilcueta',
+                name: 'Martín de Azpilcueta',
+                year: 1556,
+                era: 1,
+                eraName: 'Era 1: Origen del Valor',
+                eraBadgeColor: 'bg-sky-500/10 text-sky-400 border-sky-500/20',
+                role: 'Pionero Escolástico / Escuela de Salamanca',
+                work: 'Comentario Resolutorio de Cambios (1556)',
+                summary: 'Estableció las bases conceptuales de la preferencia temporal y el valor subjetivo del dinero.',
+                contribution: `
+                    <p class="mb-3">Azpilcueta fue uno de los primeros pensadores en notar que el dinero no tiene un valor estático, sino que varía según la disponibilidad y el momento en que se posee. Introdujo el concepto de que <strong>el dinero en el presente es más valioso que el dinero en el futuro</strong> debido a la escasez inmediata y las oportunidades de comercio presentes.</p>
+                    <p>Explicó que cobrar una compensación por la diferencia temporal en transacciones de divisas no era usurario, sino un reconocimiento justo a la pérdida de disponibilidad del capital.</p>
+                `,
+                formulaTitle: 'Concepto Clave de Preferencia Temporal',
+                formulaLatex: 'VP < VF \\implies VP = f(\\text{Escasez}, \\text{Preferencia Temporal})',
+                takeaway: 'Demuestra a tus estudiantes que el valor del dinero en el tiempo no nació en Wall Street, sino hace casi 500 años como una observación sobre la naturaleza humana y la liquidez.',
+                icon: 'fa-scroll'
+            },
+            {
+                id: 'fisher',
+                name: 'Irving Fisher',
+                year: 1930,
+                era: 1,
+                eraName: 'Era 1: Origen del Valor',
+                eraBadgeColor: 'bg-sky-500/10 text-sky-400 border-sky-500/20',
+                role: 'Padre de la Teoría Moderna del Interés',
+                work: 'The Theory of Interest (1930)',
+                summary: 'Formalizó matemáticamente la relación entre capital, interés y flujo futuro.',
+                contribution: `
+                    <p class="mb-3">Fisher unificó la teoría económica al demostrar que la tasa de interés ($i$) es el 'precio' de equilibrio entre la impaciencia por consumir hoy (preferencia temporal) y la oportunidad de invertir de forma productiva.</p>
+                    <p>Formuló explícitamente la conversión matemática entre valores futuros y valores presentes, demostrando que <strong>el valor de cualquier activo de capital es exactamente el valor presente de los flujos netos que generará en el futuro</strong>.</p>
+                `,
+                formulaTitle: 'Fórmula Clave de Descuento Inducido',
+                formulaLatex: 'VP = \\frac{VF}{(1+i)^n}',
+                takeaway: '"El capital no genera valor por sí mismo; es el valor descontado de los servicios futuros que rendirá lo que determina su precio presente."',
+                icon: 'fa-calculator'
+            },
+            {
+                id: 'williams',
+                name: 'John Burr Williams',
+                year: 1938,
+                era: 2,
+                eraName: 'Era 2: Flujos Descontados',
+                eraBadgeColor: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+                role: 'Fundador de la Valoración Fundamental',
+                work: 'The Theory of Investment Value (1938)',
+                summary: 'Creador del Modelo de Descuento de Dividendos (DDM) para acciones y bonos.',
+                contribution: `
+                    <p class="mb-3">Williams tomó la ecuación abstracta de Fisher y la aplicó a los mercados de renta variable y bonos corporativos. Argumentó que comprar una acción no debe ser un juego especulativo, sino una evaluación matemática de sus pagos futuros.</p>
+                    <p>Postuló la célebre premisa: el valor justo de una acción es la suma de todos sus dividendos futuros descontados a valor presente hasta el infinito.</p>
+                `,
+                formulaTitle: 'Modelo de Descuento de Dividendos (DDM)',
+                formulaLatex: 'V_0 = \\sum_{t=1}^{\\infty} \\frac{D_t}{(1+k)^t}',
+                takeaway: 'Williams puenteó la distancia entre la teoría macroeconómica del interés y la práctica analítica en Wall Street.',
+                icon: 'fa-chart-line'
+            },
+            {
+                id: 'gordon',
+                name: 'Myron J. Gordon',
+                year: 1956,
+                era: 2,
+                eraName: 'Era 2: Flujos Descontados',
+                eraBadgeColor: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+                role: 'Simplificador Práctico del Modelo DDM',
+                work: 'Capital Equipment Analysis: The Required Rate of Profit (1956)',
+                summary: 'Creador del Modelo de Crecimiento Constante (Gordon Growth Model).',
+                contribution: `
+                    <p class="mb-3">La suma infinita de Williams era difícil de calcular operativamente. Gordon simplificó la ecuación asumiendo que los flujos de caja (dividendos) crecen a una tasa constante perpetua ($g$).</p>
+                    <p>Esta transformación matemática convirtió la serie infinita en una fórmula simple y elegante utilizada universalmente para calcular el valor terminal en finanzas corporativas.</p>
+                `,
+                formulaTitle: 'Modelo de Crecimiento Constante de Gordon',
+                formulaLatex: 'VP = \\frac{D_1}{k - g} \\quad \\text{donde } k > g',
+                takeaway: 'Permite calcular en un solo paso el Valor Presente de una perpetuidad con crecimiento, piedra angular de la valoración por FCD.',
+                icon: 'fa-bolt'
+            },
+            {
+                id: 'markowitz',
+                name: 'Harry Markowitz',
+                year: 1952,
+                era: 3,
+                eraName: 'Era 3: Tasa de Riesgo (i)',
+                eraBadgeColor: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
+                role: 'Premio Nobel de Economía (1990)',
+                work: 'Portfolio Selection (Journal of Finance, 1952)',
+                summary: 'Padre de la Teoría Moderna de Portafolio (MPT) y la medición del riesgo.',
+                contribution: `
+                    <p class="mb-3">Markowitz respondió a la gran incógnita: ¿cómo medir el riesgo para ajustar la tasa de descuento? Demostró matemáticamente que el riesgo de un activo no se evalúa de forma aislada, sino por su varianza y covarianza con otros activos.</p>
+                    <p>Estableció que la diversificación reduce el riesgo no sistemático y que los inversionistas exigen un mayor rendimiento ($i$) únicamente por asumir riesgo irreductible.</p>
+                `,
+                formulaTitle: 'Varianza del Portafolio y Frontera Eficiente',
+                formulaLatex: '\\sigma_p^2 = w_A^2 \\sigma_A^2 + w_B^2 \\sigma_B^2 + 2w_A w_B \\sigma_{AB}',
+                takeaway: 'Marcó el inicio de la cuantificación científica de la prima por riesgo en la tasa de descuento $i$.',
+                icon: 'fa-pie-chart'
+            },
+            {
+                id: 'miller',
+                name: 'Franco Modigliani & Merton Miller',
+                year: 1958,
+                era: 3,
+                eraName: 'Era 3: Tasa de Riesgo (i)',
+                eraBadgeColor: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
+                role: 'Premios Nobel de Economía (1985 & 1990)',
+                work: 'The Cost of Capital, Corporation Finance and the Theory of Investment (1958)',
+                summary: 'Estructura de Capital y origen del WACC (Costo Promedio Ponderado de Capital).',
+                contribution: `
+                    <p class="mb-3">Revolucionaron las finanzas corporativas al analizar cómo la estructura de financiamiento (deuda vs. patrimonio) afecta la tasa de descuento exigida a una empresa.</p>
+                    <p>Sus teoremas permitieron deducir el <strong>WACC</strong>, especificando cuál es la tasa de descuento ($i$) correcta que se debe aplicar al evaluar los flujos de caja libres de una firma completa.</p>
+                `,
+                formulaTitle: 'Tasa de Descuento Corporativa (WACC)',
+                formulaLatex: 'WACC = w_e k_e + w_d k_d (1 - t)',
+                takeaway: 'Muestra cómo la tasa de descuento $i$ debe reflejar tanto el costo de la deuda como el costo de oportunidad de los accionistas.',
+                icon: 'fa-building-columns'
+            },
+            {
+                id: 'sharpe',
+                name: 'William Sharpe',
+                year: 1964,
+                era: 3,
+                eraName: 'Era 3: Tasa de Riesgo (i)',
+                eraBadgeColor: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
+                role: 'Premio Nobel de Economía (1990)',
+                work: 'Capital Asset Prices: A Theory of Market Equilibrium (1964)',
+                summary: 'Desarrolló el Modelo CAPM para precisar el costo del patrimonio ($k_e$).',
+                contribution: `
+                    <p class="mb-3">Sharpe completó el rompecabezas de la valoración. El modelo CAPM le asignó una fórmula exacta a la tasa de descuento $i$ según el riesgo sistemático del activo ($\\\\beta$).</p>
+                    <p>Demostró que la tasa exigida es igual a la tasa libre de riesgo ($R_f$) más una prima de riesgo proporcional al mercado, resolviendo cuantitativamente la $i$ de la fórmula de Valor Presente.</p>
+                `,
+                formulaTitle: 'Modelo CAPM para la Tasa de Descuento',
+                formulaLatex: 'i = R_f + \\beta \\cdot (R_m - R_f)',
+                takeaway: 'Cierra el ciclo histórico: con CAPM los financieros finalmente pudieron calcular con rigor la "i" en $VP = VF / (1+i)^n$.',
+                icon: 'fa-award'
+            }
+        ];
+
+        let currentIndex = 0;
+        let currentFilter = 'all';
+
+        // Helper to render KaTeX formula safely
+        function renderMath(latex, containerId) {
+            const container = document.getElementById(containerId);
+            if (container && window.katex) {
+                try {
+                    katex.render(latex, container, { displayMode: true, throwOnError: false });
+                } catch (e) {
+                    container.textContent = latex;
+                }
+            }
+        }
+
+        // Render card lists per era
+        function renderCards() {
+            [1, 2, 3].forEach(eraNum => {
+                const container = document.getElementById(`cards-era-${eraNum}`);
+                container.innerHTML = '';
+
+                const eraTheorists = theoristsData.filter(t => t.era === eraNum);
+
+                eraTheorists.forEach(theorist => {
+                    const globalIdx = theoristsData.findIndex(t => t.id === theorist.id);
+                    const isSelected = globalIdx === currentIndex;
+
+                    let borderStyle = 'border-slate-800 bg-slate-800/40 hover:bg-slate-800/80 hover:border-slate-700';
+                    let textHighlight = 'text-slate-300';
+                    let badgeClass = 'text-slate-400 bg-slate-800 border-slate-700';
+
+                    if (isSelected) {
+                        if (theorist.era === 1) {
+                            borderStyle = 'border-sky-500 bg-sky-950/40 glow-era1';
+                            textHighlight = 'text-sky-300';
+                            badgeClass = 'text-sky-300 bg-sky-500/20 border-sky-500/40';
+                        } else if (theorist.era === 2) {
+                            borderStyle = 'border-emerald-500 bg-emerald-950/40 glow-era2';
+                            textHighlight = 'text-emerald-300';
+                            badgeClass = 'text-emerald-300 bg-emerald-500/20 border-emerald-500/40';
+                        } else {
+                            borderStyle = 'border-purple-500 bg-purple-950/40 glow-era3';
+                            textHighlight = 'text-purple-300';
+                            badgeClass = 'text-purple-300 bg-purple-500/20 border-purple-500/40';
+                        }
+                    }
+
+                    const cardHtml = `
+                        <div data-id="${theorist.id}" data-index="${globalIdx}" class="theorist-card cursor-pointer p-3.5 rounded-xl border ${borderStyle} transition-all duration-200">
+                            <div class="flex items-center justify-between mb-1.5">
+                                <span class="text-xs font-mono font-bold ${badgeClass} px-2 py-0.5 rounded-md border">
+                                    ${theorist.year}
+                                </span>
+                                <i class="fa-solid ${theorist.icon} text-xs text-slate-500"></i>
+                            </div>
+                            <h3 class="text-sm font-bold text-white leading-snug">${theorist.name}</h3>
+                            <p class="text-xs text-slate-400 mt-1 line-clamp-2">${theorist.summary}</p>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', cardHtml);
+                });
+            });
+
+            // Re-attach card click handlers
+            document.querySelectorAll('.theorist-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const idx = parseInt(card.getAttribute('data-index'));
+                    selectTheorist(idx);
+                });
+            });
+        }
+
+        // Update detail panel for active theorist
+        function updateDetailPanel() {
+            const data = theoristsData[currentIndex];
+            const panel = document.getElementById('detail-content');
+
+            let headerBgColor = 'text-sky-400';
+            let boxBg = 'bg-sky-950/20 border-sky-500/30';
+            
+            if (data.era === 2) {
+                headerBgColor = 'text-emerald-400';
+                boxBg = 'bg-emerald-950/20 border-emerald-500/30';
+            } else if (data.era === 3) {
+                headerBgColor = 'text-purple-400';
+                boxBg = 'bg-purple-950/20 border-purple-500/30';
+            }
+
+            panel.innerHTML = `
+                <!-- Top Header Info -->
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-xs font-bold font-mono px-3 py-1 rounded-lg border ${data.eraBadgeColor}">
+                                ${data.eraName}
+                            </span>
+                            <span class="text-xs font-mono font-bold text-slate-400 bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-700">
+                                Año: ${data.year}
+                            </span>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
+                            ${data.name}
+                        </h2>
+                        <p class="text-sm font-medium ${headerBgColor} mt-1">
+                            <i class="fa-solid fa-user-tag text-xs mr-1"></i> ${data.role}
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-800/80 border border-slate-700/70 p-3 rounded-2xl md:text-right max-w-sm">
+                        <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Obra Principal / Hito</span>
+                        <p class="text-xs font-semibold text-slate-200 mt-0.5 italic">"${data.work}"</p>
+                    </div>
+                </div>
+
+                <!-- Main Body Grid: Explanation vs Formula/Takeaway -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-2">
+                    
+                    <!-- Left Column: Detailed Contribution -->
+                    <div class="lg:col-span-7 space-y-4">
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+                            <i class="fa-solid fa-book-open text-indigo-400"></i> Aporte a la Fórmula de Valor Presente
+                        </h3>
+                        <div class="text-sm text-slate-300 leading-relaxed bg-slate-950/40 p-4 rounded-2xl border border-slate-800/80 space-y-2">
+                            ${data.contribution}
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Formula Card & Key Takeaway -->
+                    <div class="lg:col-span-5 space-y-4">
+                        
+                        <!-- Mathematical Formula Box -->
+                        <div class="p-4 rounded-2xl border ${boxBg} space-y-2">
+                            <span class="text-xs font-bold text-slate-300 uppercase tracking-wider block">
+                                ${data.formulaTitle}
+                            </span>
+                            <div id="detail-formula" class="text-lg sm:text-xl font-mono text-center py-3 bg-slate-950/60 rounded-xl border border-slate-800 text-white overflow-x-auto">
+                                <!-- Rendered with KaTeX -->
+                            </div>
+                        </div>
+
+                        <!-- Class Key Takeaway Box -->
+                        <div class="bg-indigo-950/30 border border-indigo-500/30 p-4 rounded-2xl space-y-2">
+                            <span class="text-xs font-bold text-indigo-300 uppercase tracking-wider flex items-center gap-1.5">
+                                <i class="fa-solid fa-lightbulb text-yellow-400"></i> Key Takeaway para Clase
+                            </span>
+                            <p class="text-xs text-slate-300 italic leading-relaxed">
+                                "${data.takeaway}"
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            `;
+
+            // Render LaTeX for detail formula
+            renderMath(data.formulaLatex, 'detail-formula');
+        }
+
+        function selectTheorist(index) {
+            if (index < 0) index = theoristsData.length - 1;
+            if (index >= theoristsData.length) index = 0;
+            
+            currentIndex = index;
+            renderCards();
+            updateDetailPanel();
+
+            // Scroll card into view on small devices
+            const selectedCard = document.querySelector(`[data-index="${index}"]`);
+            if (selectedCard && window.innerWidth < 1024) {
+                selectedCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        // Apply era filtering visually
+        function applyFilter(era) {
+            currentFilter = era;
+            const containers = document.querySelectorAll('.era-container');
+
+            containers.forEach(container => {
+                const eraNum = container.getAttribute('data-era-container');
+                if (era === 'all' || era === eraNum) {
+                    container.classList.remove('hidden', 'opacity-40');
+                } else {
+                    container.classList.add('opacity-40');
+                }
+            });
+
+            // Update active filter button state
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                const btnEra = btn.getAttribute('data-era');
+                if (btnEra === era) {
+                    btn.classList.add('bg-indigo-600', 'text-white');
+                    btn.classList.remove('bg-slate-800', 'text-slate-300');
+                } else {
+                    btn.classList.remove('bg-indigo-600', 'text-white');
+                    btn.classList.add('bg-slate-800', 'text-slate-300');
+                }
+            });
+        }
+
+        // Event Listeners Initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            // Render Math in Header
+            renderMath('VP = \\frac{VF}{(1+i)^n}', 'header-formula');
+
+            // Render Initial Cards and Detail
+            selectTheorist(0);
+
+            // Filter button events
+            document.getElementById('filter-buttons').addEventListener('click', (e) => {
+                const btn = e.target.closest('.filter-btn');
+                if (btn) {
+                    const era = btn.getAttribute('data-era');
+                    applyFilter(era);
+                }
+            });
+
+            // Prev / Next button navigation
+            document.getElementById('btn-prev').addEventListener('click', () => {
+                selectTheorist(currentIndex - 1);
+            });
+
+            document.getElementById('btn-next').addEventListener('click', () => {
+                selectTheorist(currentIndex + 1);
+            });
+
+            // Keyboard navigation with arrow keys
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    selectTheorist(currentIndex - 1);
+                } else if (e.key === 'ArrowRight') {
+                    selectTheorist(currentIndex + 1);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
